@@ -22,7 +22,7 @@ This API classifies a given number and returns interesting mathematical properti
 
 ### 1. Clone the Repository
 ```bash
-git clone 
+git clone https://github.com/Iganya/hng_task-1.git
 cd your-repo
 ```
 
@@ -71,6 +71,26 @@ The API runs on `http://127.0.0.1:8000` by default.
 }
 ```
 
+## **Example Usage**
+
+1. **Make a GET request to the API**:
+   ```bash
+   curl -X GET https://hng-task-1-xto4.onrender.com/api/classify-number?number=3
+    ```
+2. **Example Response**:
+```json
+{
+    "number": 3,
+    "is_prime": true,
+    "is_perfect": false,
+    "properties": [
+        "armstrong",
+        "odd"
+    ],
+    "digit_sum": 3,
+    "fun_fact": "3 is the third Heegner number."
+}
+```
 
 ## Deployment
 The API is deployed to a publicly accessible endpoint.
@@ -86,3 +106,5 @@ The API is deployed to a publicly accessible endpoint.
 
 ## License
 This project is open-source and available under the MIT License.
+
+
