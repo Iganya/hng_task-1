@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from fastapi.responses import JSONResponse
@@ -54,12 +54,13 @@ def get_fun_fact(n: int) -> str:
 
 
 @app.get("/api/classify-number")
-async def classify_number(number: str = None):
+async def classify_number(number):
     try:
         number = int(number)
+    
         # Determine properties
         properties = []
-        if is_armstrong(number):
+        if is_armstrong(abs(number)):
             properties.append("armstrong")
         properties.append("odd" if number % 2 else "even")
 
@@ -69,14 +70,15 @@ async def classify_number(number: str = None):
         # Return response
         response_data = {
             "number": number,
-            "is_prime": is_prime(number),
-            "is_perfect": is_perfect(number),
+            "is_prime": is_prime(abs(number)),
+            "is_perfect": is_perfect(abs(number)),
             "properties": properties,
-            "digit_sum": get_digit_sum(number),
+            "digit_sum": get_digit_sum(abs(number)),
             "fun_fact": fun_fact,
         }
         return JSONResponse(content=response_data, status_code=200)
     
+  
     except ValueError:
-        return JSONResponse(content={"number": str(number) if number else None, "error": True}, status_code=400)
+        return JSONResponse(content={"number": "alphabet", "error": True}, status_code=400)
     
